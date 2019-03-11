@@ -1,4 +1,4 @@
-import random 
+import random
 
 class Firm:
 
@@ -30,12 +30,18 @@ class Firm:
   def getq(self):
       return self.q_table
 
-  def max_col(self, stuff):
-    max = stuff[0]
+  def max_col(self, table):
+    max = table[0]
     max_col_index = 0
-    for i in range(1, len(stuff)):
-      if stuff[i] > max:
-        max = stuff[i]
+    for i in range(1, len(table)):
+      if table[i] > max:
+        max = table[i]
         max_col_index = i
 
     return max_col_index
+
+  def find_nash(self):
+        nash_table = []
+        for i in range(len(self.p_table[0])):
+            nash_table.append(self.max_col(self.p_table[i]))
+        return nash_table

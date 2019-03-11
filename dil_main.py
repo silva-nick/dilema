@@ -20,8 +20,20 @@ for i in range(1000): #number of iterations at each price set
         firm1.run(action1, action2)
         firm2.run(action2, action1)
     epsilon -= .001
+
+def nash_equilibrium(firm1n, firm2n):
+    output = [()]
+    for i in range (len(firm1n)):
+        if firm1n[i] == firm2n[i]:
+            output.append((firm1n[i], firm2n[i]))
+    return output
+
+
+
 print(firm1.best_action(), "\n", firm1.printp())
 print(firm1.getq())
 print()
 print(firm2.best_action(), "\n", firm2.printp())
 print(firm2.getq())
+print()
+print(nash_equilibrium(firm1.find_nash(), firm2.find_nash()))
