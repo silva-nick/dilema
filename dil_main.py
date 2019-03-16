@@ -7,7 +7,7 @@ firm1.create()
 firm2.create()
 
 epsilon = 1 #rate at which it randomly explores
-"""
+
 for i in range(1000): #number of iterations at each price set
     if(epsilon > random.random()): #should we explore or not
         action1 = random.randint(0, 2)
@@ -29,7 +29,6 @@ def nash_equilibrium(firm1n, firm2n):
     return output
 
 
-
 print(firm1.best_action(), "\n", firm1.printp())
 print(firm1.getq())
 print(firm2.find_nash())
@@ -38,9 +37,5 @@ print(firm2.best_action(), "\n", firm2.printp())
 print(firm2.getq())
 print(firm1.find_nash())
 print()
-"""
-print(firm1.printp())
-print(firm1.find_nash())
-print(firm2.printp())
-print(firm2.find_nash())
-#print(nash_equilibrium(firm1.find_nash(), firm2.find_nash()))
+
+print(nash_equilibrium(firm1.find_nash(), firm2.find_nash()))

@@ -35,7 +35,6 @@ class Firm:
     max_col_index = 0
     for i in range(1, len(table)):
       if table[i] > max:
-        print (table[i])
         max = table[i]
         max_col_index = i
 
