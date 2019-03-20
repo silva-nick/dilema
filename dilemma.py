@@ -50,8 +50,8 @@ class Firm:
     return max_col_index
 
   def find_nash(self):
-      #returns the largest number in each row i.e. the best decision given the other firm's action
-      nash_table = []
-      for i in range(len(self.p_table[0])):
-        nash_table.append(self.max_col(self.p_table[i]))
-        return nash_table
+    #returns the largest number in each row i.e. the best decision given the other firm's action
+    nash_table = []
+    for i in range(len(self.p_table[0])):
+      nash_table.append(self.max_col(self.p_table[i]))
+    return nash_table
