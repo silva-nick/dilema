@@ -1,10 +1,13 @@
 import dilemma
 import random
+import numpy as np
 
 class Main:
 
     def __init__(self):
+
         self.display_one_trial()
+        pass
 
     def q_equilibrium(self, firm1, firm2):
 
@@ -51,7 +54,18 @@ class Main:
         print(firm2.find_nash())
         print()
 
+        self.print_dmatrix(firm1, firm2)
         print(self.nash_equilibrium(firm1.find_nash(), firm2.find_nash()))
+
+    def print_dmatrix(self, firm1, firm2):
+
+        x = firm1.getp()
+        y = firm2.getp()
+        z = [[], [], []]
+        for i in range(3):
+            for j in range(3):
+                z[i].append( (x[i][j], y[i][2-j] ))
+            print(z[i])
 
 
     def test(self, n): #number of tests
@@ -73,4 +87,4 @@ class Main:
         print( str(success_count * 100 / n) + "% success rate" )
 
 test = Main()
-test.test(1000)
+test.test(500)

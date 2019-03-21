@@ -8,7 +8,7 @@ class Firm:
   #holds the direct payoff for any action (column) given the other firms action (row)
 
   learning_rate = .8 #rate at which it values new data
-  discount_rate = .2 #rate at which it values future benefit
+  discount_rate = .4 #rate at which it values future benefit
 
   def create(self):
     self.p_table = [[random.randint(0, 10) for x in range(3)] for y in range(3)]
@@ -19,7 +19,8 @@ class Firm:
   def run(self, my_action, their_action):
     #runs one trial given two chosen actions
 
-    self.q_table[my_action] = self.q_table[my_action] + self.learning_rate *(self.p_table[their_action][my_action] - self.discount_rate * self.max_col(self.p_table[their_action]))
+    self.q_table[my_action] = ((1 - self.learning_rate) * self.q_table[my_action] +
+        self.learning_rate * (self.p_table[their_action][my_action] + self.discount_rate * self.max_col(self.p_table[their_action])))
     #Changes the current q table value given the payoff of the current situation
 
     if(self.learning_rate > .005):
@@ -37,6 +38,9 @@ class Firm:
 
   def getq(self):
     return self.q_table
+
+  def getp(self):
+    return self.p_table
 
   def max_col(self, table):
     #given a row this returns the index of the largest value in that row
