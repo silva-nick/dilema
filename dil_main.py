@@ -34,6 +34,21 @@ class Main:
                 output.append((firm1n[i], firm2n[i]))
         return output
 
+    def cooperation_equilibrium(self, firm1, firm2):
+        #finds the pair of decisions that results in the highest total benefit
+        matrix = self.dmatrix(firm1, firm2)
+
+        max = 0
+        max_index = []
+
+        for i in range(3):
+            for j in range(3):
+                if sum(matrix[i][j]) > max:
+                    max = sum(matrix[i][j])
+                    max_index.append( (i, j) )
+
+        return max_index
+
     def display_one_trial(self):
         #display the results\
         firm1 = dilemma.Firm()
@@ -54,10 +69,11 @@ class Main:
         print(firm2.find_nash())
         print()
 
-        self.print_dmatrix(firm1, firm2)
+        print(self.dmatrix(firm1, firm2))
         print(self.nash_equilibrium(firm1.find_nash(), firm2.find_nash()))
+        print(self.cooperation_equilibrium(firm1, firm2))
 
-    def print_dmatrix(self, firm1, firm2):
+    def dmatrix(self, firm1, firm2):
 
         x = firm1.getp()
         y = firm2.getp()
@@ -65,12 +81,14 @@ class Main:
         for i in range(3):
             for j in range(3):
                 z[i].append( (x[i][j], y[i][2-j] ))
-            print(z[i])
+
+        return z
 
 
     def test(self, n): #number of tests
 
-        success_count = 0
+        n_success = 0
+        c_success = 0
         for i in range(n):
             firm1 = dilemma.Firm()
             firm2 = dilemma.Firm()
@@ -81,10 +99,15 @@ class Main:
 
             q_decision = ( firm1.best_action(), firm2.best_action() )
             n_decision = self.nash_equilibrium(firm1.find_nash(), firm2.find_nash())
+            c_decision = self.cooperation_equilibrium(firm1, firm2)
             if q_decision in n_decision:
-                success_count += 1
+                n_success += 1
+            if q_decision in c_decision:
+                c_success += 1
 
-        print( str(success_count * 100 / n) + "% success rate" )
+
+        print( str(n_success * 100 / n) + "% success rate of finding nash" )
+        print( str(c_success * 100 / n) + "% success rate of finding coop" )
 
 test = Main()
-test.test(500)
+test.test(5000)

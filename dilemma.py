@@ -19,8 +19,8 @@ class Firm:
   def run(self, my_action, their_action):
     #runs one trial given two chosen actions
 
-    self.q_table[my_action] = ((1 - self.learning_rate) * self.q_table[my_action] +
-        self.learning_rate * (self.p_table[their_action][my_action] + self.discount_rate * self.max_col(self.p_table[their_action])))
+    self.q_table[my_action] = ((1 - self.learning_rate) * self.q_table[my_action]
+        + self.learning_rate * (self.p_table[their_action][my_action] + self.discount_rate * self.max_col(self.p_table[their_action])))
     #Changes the current q table value given the payoff of the current situation
 
     if(self.learning_rate > .005):
